@@ -32,11 +32,9 @@ const AddTicket = ({updateState}) => {
         };
      
 
-        axios.post("http://127.0.0.1:4000/app/tickets", { title, description }, config).then(data => {
+        axios.post("http://127.0.0.1:4000/app/tickets", { title, description, attachment }, config).then(data => {
             console.log(data);  //dispatch a change to redux 
-
-            updateState(data); 
-            
+            updateState(data);  //////  ////   
             setTitle("");
             setAttachment("")
         });
