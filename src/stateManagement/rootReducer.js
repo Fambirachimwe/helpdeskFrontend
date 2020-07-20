@@ -1,8 +1,17 @@
+import {persistReducer} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
 const initState = {
     isAuth : false,
     tickets: []
 }
 
+
+const persistConfig = {
+    key: "root",
+    storage,
+    whitelist: ['rootReducer']
+}
 
 const rootReducer = (state=initState, action) => {
 
@@ -23,12 +32,12 @@ const rootReducer = (state=initState, action) => {
     if(action.type === 'UPDATE_STATE'){
         return {
             ...state,
-            tickets: [action.ticket, ...state.tickets]
+            tickets: [ state.tickets || undefined ? [...state.tickets] : [[] ,action.ticket], action.ticket],
         }
     }
 
 };
 
-export default rootReducer;
+export default persistReducer(persistConfig ,rootReducer);
 
 

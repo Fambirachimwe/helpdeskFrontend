@@ -3,8 +3,9 @@ import Navbar from "../components/Navbar.component";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import AddTicket from '../components/addTicket.component';
 import MyTickets from '../components/myTickets.component';
+import axios from 'axios';
 
-
+import {getLocalStorage} from '../util/util'
 
 import { connect} from 'react-redux'
 
@@ -12,8 +13,27 @@ import { connect} from 'react-redux'
 
 class UserHomepage  extends React.Component{
 
+  componentDidMount(){
+    const config = {
+      headers: {
+        "X-Auth-Token": getLocalStorage()
+      }
+    }
+    axios.get('http://127.0.0.1:4000/app/tickets', config).then(data => {
+      this.props.getTickets(data.data.tickets)
+    })
+  }
+
+
+  // chechAuth(){
+    
+  // }
+
 
   render(){
+
+    
+
     return (
 
 
@@ -84,5 +104,12 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getTickets: (data) => { dispatch ({ type: "GET_USER_TICKETS", tickets: data})},
+   
+  }
+}
 
-export default connect(mapStateToProps)(UserHomepage);
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserHomepage);

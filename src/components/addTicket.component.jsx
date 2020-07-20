@@ -3,10 +3,33 @@ import axios from 'axios';
 import {getToken} from '../Auth/auth';
 import { connect } from 'react-redux';
 
-const AddTicket = ({updateState}) => {
+
+// using xmlHttp request 
+// const sendHttpRequest = (method, url, data, Authheader) => {
+
+//     const promise = new Promise((resolve, reject) => {
+//         const xhr = new XMLHttpRequest();
+
+//         xhr.open(method, url, data)
+//         xhr.setRequestHeader(Authheader, getToken())
+//         xhr.responseType = 'json';
+//         xhr.onload =() => {
+//             resolve(xhr.response);
+//         }
+
+//         xhr.send()
+
+//     })
+//     return promise;
+    
+// }
+
+
+const AddTicket = (props) => {
+    // console.log(props);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [attachment, setAttachment] = useState(null);
+    // const [attachment, setAttachment] = useState(null);
 
     const handleTitle =(evt) => {
         setTitle(evt.target.value);
@@ -30,13 +53,25 @@ const AddTicket = ({updateState}) => {
                 'X-Auth-Token': token
             }
         };
+
+        
      
 
+<<<<<<< HEAD
         axios.post("http://127.0.0.1:4000/app/tickets", { title, description, attachment }, config).then(data => {
             console.log(data);  //dispatch a change to redux 
             updateState(data);  //////  ////   
+=======
+        axios.post("http://127.0.0.1:4000/app/tickets", { title, description }, config).then(data => {
+            console.log(data.data.data)
+            
+            props.updateState(data.data.data); 
+            alert('ticket added sucessfully ');
+            
+>>>>>>> 0fcdb35584277ee9db42c137997cf0b1fcba454c
             setTitle("");
-            setAttachment("")
+            setDescription("")
+            // setAttachment("")
         });
 
         
