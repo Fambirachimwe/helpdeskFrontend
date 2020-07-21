@@ -57,18 +57,12 @@ const AddTicket = (props) => {
         
      
 
-<<<<<<< HEAD
-        axios.post("http://127.0.0.1:4000/app/tickets", { title, description, attachment }, config).then(data => {
-            console.log(data);  //dispatch a change to redux 
-            updateState(data);  //////  ////   
-=======
         axios.post("http://127.0.0.1:4000/app/tickets", { title, description }, config).then(data => {
             console.log(data.data.data)
             
             props.updateState(data.data.data); 
             alert('ticket added sucessfully ');
             
->>>>>>> 0fcdb35584277ee9db42c137997cf0b1fcba454c
             setTitle("");
             setDescription("")
             // setAttachment("")

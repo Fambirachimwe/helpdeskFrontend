@@ -30,10 +30,23 @@ const rootReducer = (state=initState, action) => {
     }
 
     if(action.type === 'UPDATE_STATE'){
-        return {
-            ...state,
-            tickets: [ state.tickets || undefined ? [...state.tickets] : [[] ,action.ticket], action.ticket],
+        console.log(state.tickets)
+        if(state.tickets === undefined){
+            return {
+                ...state,
+                tickets: [action.ticket]
+            }
         }
+        else {
+            return {
+                ...state,
+                tickets: [...state.tickets, action.ticket]
+            }
+        }
+        // return {
+        //     ...state,
+        //     tickets: [ state.tickets === undefined ? [action.ticket] : [...state.tickets, action.ticket] ],
+        // }
     }
 
 };
