@@ -55,7 +55,7 @@ const LoginPage = (props) => {
 
                     <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
                     <label htmlFor="username" className="sr-only">Username</label>
-                    <input type="text" id="username" className="form-control" value={username} onChange={handleChangeUsername} placeholder="Email address" required="" autoFocus="" />
+                    <input type="text" id="username" className="form-control" value={username} onChange={handleChangeUsername} placeholder="Username" required="" autoFocus="" />
                     <label htmlFor="inputPassword" className="sr-only">Password</label>
                     <input type="password" id="inputPassword" autoComplete="on" value={password} onChange={handleChangePassword} className="form-control" placeholder="Password" required="" />
                     <div className="checkbox mb-3">

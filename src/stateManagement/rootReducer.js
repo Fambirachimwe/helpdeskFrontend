@@ -29,6 +29,7 @@ const rootReducer = (state=initState, action) => {
         }
     }
 
+
     if(action.type === 'UPDATE_STATE'){
         console.log(state.tickets)
         if(state.tickets === undefined){
@@ -43,10 +44,6 @@ const rootReducer = (state=initState, action) => {
                 tickets: [...state.tickets, action.ticket]
             }
         }
-        // return {
-        //     ...state,
-        //     tickets: [ state.tickets === undefined ? [action.ticket] : [...state.tickets, action.ticket] ],
-        // }
     }
 
 };

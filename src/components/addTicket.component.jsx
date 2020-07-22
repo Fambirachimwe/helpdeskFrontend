@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {getToken} from '../Auth/auth';
+import {getLocalStorage, multipartRequest} from '../util/util'
 import { connect } from 'react-redux';
 
 
@@ -29,7 +29,7 @@ const AddTicket = (props) => {
     // console.log(props);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    // const [attachment, setAttachment] = useState(null);
+    const [attachment, setAttachment] = useState(null);
 
     const handleTitle =(evt) => {
         setTitle(evt.target.value);
@@ -38,47 +38,35 @@ const AddTicket = (props) => {
         setDescription(evt.target.value)
     }
 
-    // const handleAttachment = (evt) => {
-    //     setAttachment(evt.target.files[0]);
-    // }
+    const handleAttachment = (evt) => {
+        setAttachment(evt.target.files[0]);
+    }
 
     const handleSubmit = (evt) => {
 
         evt.preventDefault();
-        const token = window.localStorage.getItem('token');
-        // console.log(attachment)
-        const config = {
+        const token = getLocalStorage() ;
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append("description", description);
+        formData.append("attachment", attachment)
+
+        axios({
+            url: "http://127.0.0.1:4000/app/tickets",
+            method: "POST",
+            data: formData,
             headers: {
-                // 'content-type': 'multipart/form-data',
-                'X-Auth-Token': token
+                "content-type": "multipart/form-data",
+                "X-Auth-Token": token
             }
-        };
-
-        
-     
-
-        axios.post("http://127.0.0.1:4000/app/tickets", { title, description }, config).then(data => {
-            console.log(data.data.data)
-            
-            props.updateState(data.data.data); 
-            alert('ticket added sucessfully ');
-            
-            setTitle("");
-            setDescription("")
-            // setAttachment("")
-        });
-
-        
-
-
-        // console.log(data);
-        // axios.post("http://127.0.0.1:4000/app/tickets/", {title, description, token}).then(response => {
-        //     console.log(response);
-        // });
-        
-        
-    
-       
+        }).then(data => {
+            // console.log(data);
+                props.updateState(data.data.data); 
+                alert('ticket added sucessfully ');
+                setTitle("");
+                setDescription("")
+        })  
+ 
     }
 
     return (
@@ -97,9 +85,10 @@ const AddTicket = (props) => {
                 <textarea className="form-control" value={description} onChange={handleDescription} id="exampleFormControlTextarea1" rows="3"></textarea>
 
                 {/* atttachment field */}
-                {/* <label htmlFor="exampleFormControlFile1">Attachement</label> */}
-                {/* <input type="file" name="attachment" onChange={handleAttachment} className="form-control-file" id="exampleFormControlFile1"></input> */}
-                {/* <small id="emailHelp" className="form-text text-muted">Add Screen Shot of the error Mesage</small> */}
+
+                <label htmlFor="exampleFormControlFile1">Attachement</label>
+                <input type="file" name="attachment" onChange={handleAttachment} className="form-control-file" id="exampleFormControlFile1"></input>
+                <small id="emailHelp" className="form-text text-muted">Add Screen Shot of the error Mesage</small>
             </div>
 
             <button type="submit" className="btn btn-primary">Submit</button>
