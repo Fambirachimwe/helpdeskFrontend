@@ -1,28 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {getLocalStorage, multipartRequest} from '../util/util'
+import {getLocalStorage} from '../util/util'
 import { connect } from 'react-redux';
 
-
-// using xmlHttp request 
-// const sendHttpRequest = (method, url, data, Authheader) => {
-
-//     const promise = new Promise((resolve, reject) => {
-//         const xhr = new XMLHttpRequest();
-
-//         xhr.open(method, url, data)
-//         xhr.setRequestHeader(Authheader, getToken())
-//         xhr.responseType = 'json';
-//         xhr.onload =() => {
-//             resolve(xhr.response);
-//         }
-
-//         xhr.send()
-
-//     })
-//     return promise;
-    
-// }
 
 
 const AddTicket = (props) => {

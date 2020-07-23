@@ -1,11 +1,11 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Redirect, withRouter} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Homepage from './pages/HomePage.pages';
 import LoginPage from './pages/loginPage.pages';
 import Signup from './pages/signup.pages';
 import UserHomepage from './pages/userHome.pages';
+import TicketDetailPage from './pages/ticketDetail.page';
 import ProtectedRoute from './components/protected.route';
-import axios from 'axios';
 import {getLocalStorage} from './util/util'
 import {connect} from 'react-redux';
 

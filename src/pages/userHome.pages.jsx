@@ -1,8 +1,9 @@
 import React from "react";
 import Navbar from "../components/Navbar.component";
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import AddTicket from '../components/addTicket.component';
 import MyTickets from '../components/myTickets.component';
+import TicketDetailPage from './ticketDetail.page';
 import axios from 'axios';
 
 import {getLocalStorage} from '../util/util'
@@ -19,25 +20,17 @@ class UserHomepage  extends React.Component{
         "X-Auth-Token": getLocalStorage()
       }
     }
-    axios.get('http://127.0.0.1:4000/app/tickets', config).then(data => {
-      this.props.getTickets(data.data.tickets)
-    })
+
+    // getting tickets of the logged in user 
+    axios.get("http://127.0.0.1:4000/app/mytickets", config).then(data => {
+      this.props.getTickets(data.data.tickets);
+    });
   }
-
-
-  // chechAuth(){
-    
-  // }
 
 
   render(){
 
-    
-
     return (
-
-
-
       <div>
         <Navbar />
     
@@ -78,8 +71,15 @@ class UserHomepage  extends React.Component{
                 <h1 className="h2">Dashboard</h1>
               </div>
     
-              <Route  path="/add-ticket" component={AddTicket} />
-              <Route path="/home" component={ MyTickets } />
+              
+              <Switch>
+                <Route  path="/home/:id"  component={TicketDetailPage}/>
+                <Route  path="/add-ticket" component={AddTicket} />
+                <Route path="/home" component={ MyTickets } /> 
+              </Switch>
+
+               
+              
              
             </main>
           </div>
