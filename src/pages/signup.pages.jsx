@@ -31,7 +31,7 @@ const Signup = ({ history }) => {
     const handleSubmit = (event) => {
 
         axios.post("http://127.0.0.1:4000/user/signup", { username, email, password }).then(data => {
-            console.log(data.data)
+            // console.log(data.data.user.role)
             alert('signup success please Login');
             history.push('/login')
         })
@@ -48,7 +48,7 @@ const Signup = ({ history }) => {
 
     return (
         <div>
-            <Navbar />
+            {/* <Navbar /> */}
 
             <h5>Register</h5>
 

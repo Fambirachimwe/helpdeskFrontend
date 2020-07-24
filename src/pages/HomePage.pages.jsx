@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar.component';
 const Homepage = () => (
     <div>
         
-        <Navbar />
+        {/* <Navbar /> */}
 
         the homepage (landing page )
        

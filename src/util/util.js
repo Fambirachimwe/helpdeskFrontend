@@ -27,3 +27,7 @@ export const multipartRequest = (method, url, formData) => {
         return xhr.send(formData);
     });
 }
+
+export const LogOut = () => {
+  window.localStorage.removeItem("token");
+}

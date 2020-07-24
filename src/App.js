@@ -4,7 +4,11 @@ import Homepage from './pages/HomePage.pages';
 import LoginPage from './pages/loginPage.pages';
 import Signup from './pages/signup.pages';
 import UserHomepage from './pages/userHome.pages';
-import TicketDetailPage from './pages/ticketDetail.page';
+// import TicketDetailPage from './pages/ticketDetail.page';
+
+import Navbar from './components/Navbar.component';
+
+import AdminPage from './pages/AdminPage.pages';
 import ProtectedRoute from './components/protected.route';
 import {getLocalStorage} from './util/util'
 import {connect} from 'react-redux';
@@ -16,8 +20,6 @@ import {store} from './stateManagement/store';
 class App extends React.Component{
   
   componentDidMount(){
-
-   
     if(getLocalStorage()){
         store.dispatch({type: "LOGGED_IN", isAuth: true});  
     }
@@ -28,14 +30,16 @@ class App extends React.Component{
     // const {isAuth} = this.props;
     return (
       <div className="App">
+      
         <Router>
+          <Navbar />
           <Route exact path="/" component={Homepage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/signup" component={Signup} />
 
-          <ProtectedRoute isAuth={this.props.isAuth}>
-            <Route exact path="/home" component={UserHomepage} />
-          </ProtectedRoute>
+          <ProtectedRoute isAuth={this.props.isAuth}><Route exact path="/home" component={UserHomepage} /></ProtectedRoute>
+
+          <ProtectedRoute isAuth={this.props.isAuth}><Route exact path="/admin" component={AdminPage} /></ProtectedRoute>
           
         </Router>
         

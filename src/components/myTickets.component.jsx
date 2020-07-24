@@ -7,9 +7,6 @@ const MyTickets = ({ tickets }) => (
 
 
   <div>
-    {/* {
-        console.log(tickets)
-      } */}
     <h4>My Tickets</h4>
     <br />
     <br />
@@ -21,8 +18,6 @@ const MyTickets = ({ tickets }) => (
             <th>Title</th>
             <th>Priority</th>
             <th>Status</th>
-            <th>Edit</th>
-            
           </tr>
         </thead>
         <tbody>
@@ -45,7 +40,6 @@ const MyTickets = ({ tickets }) => (
             ) : (null)
 
           }
-         
         </tbody>
       </table>
     </div>

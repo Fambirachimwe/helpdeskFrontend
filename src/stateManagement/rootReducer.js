@@ -22,6 +22,13 @@ const rootReducer = (state=initState, action) => {
         }
     }
 
+    if(action.type === 'LOGOUT'){
+        return {
+            ...state,
+            isAuth: action.isAuth
+        }
+    }
+
     if(action.type === 'GET_USER_TICKETS'){
         return {
             ...state,

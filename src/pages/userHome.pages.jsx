@@ -32,7 +32,7 @@ class UserHomepage  extends React.Component{
 
     return (
       <div>
-        <Navbar />
+        {/* <Navbar /> */}
     
         <Router>
         <div className="container-fluid">

@@ -22,12 +22,19 @@ const LoginPage = (props) => {
         event.preventDefault();
         axios.post('http://127.0.0.1:4000/user/login', { username, password }).then(data => {
             if(data.data) {
+                console.log(data.data.role);
 
                 const locaStorage = window.localStorage;
                 locaStorage.setItem('token', data.data.token);
                
                 props.isAuth();  // dispatching action  to redux state a
-                props.history.push('/home');
+
+                if(data.data.role === 'User'){
+                    props.history.push('/home');
+                } else {
+                    props.history.push('/admin')
+                }
+                
 
             
                 // console.log('token sent to the frontend')
@@ -41,7 +48,7 @@ const LoginPage = (props) => {
 
     return (
         <div id="app">
-            <Navbar />
+            {/* <Navbar /> */}
 
 
             {/* <form onSubmit={handleSubmit}>
